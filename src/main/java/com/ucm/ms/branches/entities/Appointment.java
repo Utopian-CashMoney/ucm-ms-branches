@@ -36,6 +36,9 @@ public class Appointment implements Serializable {
 	private Banker banker;
 
 	// Methods
+	public Appointment() {
+	}
+	
 	public Appointment(LocalDateTime scheduledTime, String service, Branch branch, Banker banker) {
 		super();
 		this.scheduledTime = scheduledTime;

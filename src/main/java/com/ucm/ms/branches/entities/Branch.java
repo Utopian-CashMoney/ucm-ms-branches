@@ -31,11 +31,11 @@ public class Branch implements Serializable {
 	private String city;
 
 	@Column(name = "opening_time")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	private LocalTime openingTime;
 
 	@Column(name = "closing_time")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	private LocalTime closingTime;
 
 	// Relationships
