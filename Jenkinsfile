@@ -30,19 +30,12 @@ pipeline {
                   sh 'mvn clean test'        
             }
         }
-	    
-	stage('SonarQube Analysis') {
-		def mvn = tool 'Maven 3.8.1';
-   		withSonarQubeEnv() {		
-      			sh "${mvn}/bin/mvn sonar:sonar"
-    		}
-  	}
-	    
-        stage ('Build') {
+	      
+        stage ('Build & SonarQube Analysis') {
             
             steps {
- 
-                  sh 'mvn clean package' 
+ 		  withSonarQubeEnv('ucm-ms-branches')
+                  sh 'mvn clean package sonar:sonar' 
                 
             }
         }
