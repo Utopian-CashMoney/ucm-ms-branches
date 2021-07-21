@@ -34,9 +34,9 @@ pipeline {
         stage ('Build & SonarQube Analysis') {
             
             steps {
- 		  withSonarQubeEnv('ucm-ms-branches')
-                  sh 'mvn clean package sonar:sonar' 
-                
+		  withSonarQubeEnv('ucm-ms-branches') {
+                  	sh 'mvn clean package sonar:sonar' 
+		}
             }
         }
 	    
