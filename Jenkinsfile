@@ -30,11 +30,20 @@ pipeline {
                   sh 'mvn clean test'        
             }
         }
-
+	    
+	stage('SonarQube Analysis') {
+		
+	    steps{
+   		withSonarQubeEnv() {
+      			sh "${mvn}/bin/mvn sonar:sonar"
+    			}
+    		}
+  	}
+	    
         stage ('Build') {
             
             steps {
-            
+ 
                   sh 'mvn clean package' 
                 
             }
