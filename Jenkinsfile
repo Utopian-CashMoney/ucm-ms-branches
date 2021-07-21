@@ -32,14 +32,12 @@ pipeline {
         }
 	    
 	stage('SonarQube Analysis') {
-		
-	    steps{
-		    
    		withSonarQubeEnv() {
 			
+		steps {
+			def mvn = tool 'Maven 3.8.1';
       			sh "${mvn}/bin/mvn sonar:sonar"
-			
-    			}
+			}
     		}
   	}
 	    
