@@ -34,8 +34,11 @@ pipeline {
 	stage('SonarQube Analysis') {
 		
 	    steps{
+		    
    		withSonarQubeEnv() {
+			
       			sh "${mvn}/bin/mvn sonar:sonar"
+			
     			}
     		}
   	}
