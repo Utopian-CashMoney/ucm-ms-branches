@@ -33,20 +33,13 @@ pipeline {
         }
 	stage ('SonarQube Analysis') {
             
-            steps {
-        	withSonarQubeEnv('Sonarqube') {
-            		sh "${scannerHome}/bin/sonar-scanner" \
-			-D sonar.login=admin \
-			-D sonar.password=sonar123 \
-			-D sonar.projectKey=ucm-ms-branches \
-			-D sonar.host.url=http://3.21.4.230:9000/*
-		}
-		    
-		    timeout(time: 10, unit: 'MINUTES') {
-		    	waitForQualityGate abortPipeline: true
-		}
-            }
+             steps {
+                      withSonarQubeEnv('Sonarqube') {
+                          sh 'mvn sonar:sonar'
+                      }
+                  }
         }   
+	    
         stage ('Build') {
             
             steps {
