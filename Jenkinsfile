@@ -34,7 +34,7 @@ pipeline {
 	stage ('SonarQube Analysis') {
             
 	     tools {
-			jdk 'jdk-11.0.12'
+			jdk 'jdk11'
 		}
 		
              steps {
