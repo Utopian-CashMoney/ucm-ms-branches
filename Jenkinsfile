@@ -40,7 +40,7 @@ pipeline {
              steps {
 		     	  sh 'java -version'
                       withSonarQubeEnv('Sonarqube') {
-                          sh 'mvn sonar:sonar'
+                          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
                       }
                   }
         }   
