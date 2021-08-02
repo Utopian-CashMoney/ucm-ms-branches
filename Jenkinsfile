@@ -33,7 +33,12 @@ pipeline {
         }
 	stage ('SonarQube Analysis') {
             
+	     tools {
+			jdk 'jdk-11.0.12'
+		}
+		
              steps {
+		     	  sh 'java -version'
                       withSonarQubeEnv('Sonarqube') {
                           sh 'mvn sonar:sonar'
                       }
@@ -41,7 +46,10 @@ pipeline {
         }   
 	    
         stage ('Build') {
-            
+	    tools { 
+	    		jdk 'jdk1.8' 
+    	    }
+		
             steps {
                   	sh 'mvn clean package' 	
             }
