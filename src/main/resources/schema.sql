@@ -75,6 +75,8 @@ CREATE TABLE IF NOT EXISTS `branch`
     `city`            VARCHAR(127) NOT NULL,
     `opening_time`    TIME         NOT NULL,
     `closing_time`    TIME         NOT NULL,
+    `type`            VARCHAR(16)  NOT NULL,
+    `phone`           VARCHAR(31)  NOT NULL,
     PRIMARY KEY (`location_number`)
 );
 
