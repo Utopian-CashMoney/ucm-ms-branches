@@ -29,6 +29,7 @@ pipeline {
             steps {
             
                   sh 'mvn clean test'        
+
             }
         }
 	stage ('SonarQube Analysis') {
@@ -54,7 +55,7 @@ pipeline {
                   	sh 'mvn clean package' 	
             }
         }
-	    
+
        stage("Docker Build") {
 	   steps {
 	        echo "Docker Build...."
