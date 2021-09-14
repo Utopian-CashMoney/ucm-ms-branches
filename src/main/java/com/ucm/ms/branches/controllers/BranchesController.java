@@ -15,7 +15,7 @@ import com.ucm.ms.branches.services.BranchSearch;
 
 @CrossOrigin
 @RestController
-@RequestMapping("branches")
+@RequestMapping("/branches")
 public class BranchesController {
 	private final BranchSearch branchSearch;
 

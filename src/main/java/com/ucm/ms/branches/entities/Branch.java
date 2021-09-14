@@ -38,6 +38,12 @@ public class Branch implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	private LocalTime closingTime;
 
+	@Column(name = "type")
+	private String type;
+	
+	@Column(name = "phone")
+	private String phone;
+	
 	// Relationships
 	// None
 
@@ -46,7 +52,7 @@ public class Branch implements Serializable {
 	}
 
 	public Branch(Integer locationNumber, String name, String zip, String streetAddress, String city,
-			LocalTime openingTime, LocalTime closingTime) {
+			LocalTime openingTime, LocalTime closingTime, String type, String phone) {
 		this.locationNumber = locationNumber;
 		this.name = name;
 		this.zip = zip;
@@ -54,6 +60,8 @@ public class Branch implements Serializable {
 		this.city = city;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime;
+		this.type = type;
+		this.phone = phone;
 	}
 
 	public Integer getLocationNumber() {
@@ -111,6 +119,22 @@ public class Branch implements Serializable {
 	public void setClosingTime(LocalTime closingTime) {
 		this.closingTime = closingTime;
 	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -122,12 +146,13 @@ public class Branch implements Serializable {
 		return Objects.equals(locationNumber, branch.locationNumber) && Objects.equals(name, branch.name)
 				&& Objects.equals(zip, branch.zip) && Objects.equals(streetAddress, branch.streetAddress)
 				&& Objects.equals(city, branch.city) && Objects.equals(openingTime, branch.openingTime)
-				&& Objects.equals(closingTime, branch.closingTime);
+				&& Objects.equals(closingTime, branch.closingTime) && Objects.equals(type, branch.type) 
+				&& Objects.equals(phone, branch.phone);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(locationNumber, name, zip, streetAddress, city, openingTime, closingTime);
+		return Objects.hash(locationNumber, name, zip, streetAddress, city, openingTime, closingTime, type, phone);
 	}
 
 }
