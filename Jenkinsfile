@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         NAME = 'branches-ms'
-        AWS_REGION = 'us-east-2'
+        AWS_REGION = 'us-east-1'
         GIT_COMMIT = '${env.GIT_COMMIT}'
     }
 
