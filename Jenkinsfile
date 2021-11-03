@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'Maven 3.8.1'
-        jdk 'jdk1.8'
+	    jdk 'jdk1.8'
     }
 
     options {
@@ -14,7 +14,7 @@ pipeline {
     environment {
         NAME = 'branches-ms'
         AWS_REGION = 'us-east-1'
-        GIT_COMMIT = '${env.GIT_COMMIT}'
+        GIT_COMMIT = "${env.GIT_COMMIT}"
     }
 
     stages {
@@ -25,11 +25,24 @@ pipeline {
             }
         }
 
-    }
+        stage ('Code Analysis') {
+            steps {
+                // Set SonarQube home directory, waiting for better way to do this
+                script {
+                    scannerHome = tool 'SonarQube Scanner 4.6'
+                }
+                // Run SonarQube scan using running EC2 instance
+                withSonarQubeEnv('SonarQube Scanner') {
+                    sh "mvn sonar:sonar -Dsonar.host.url=http://sonar.utopiancashmoney.de -Dsonar.login=cef3082f45d1a97f1b7dc6dcbc96124a761cd765"
+                }
+            }
+        }
 
-    stage ('Build Docker Image') {
-        steps {
-            sh 'docker build . -t ${NAME}'
+        stage('Build Docker image') {
+            steps {
+                // Build project into Docker image
+                sh 'docker build . -t ${NAME}'
+            }
         }
 		
         stage('Push to Amazon ECR') {
@@ -46,13 +59,7 @@ pipeline {
                     sh "docker tag ${NAME}:latest ${aws_account_id}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAME}:latest"
                     sh "docker push ${aws_account_id}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NAME}:latest"
                 }
-        }
-    }
-    }
-    post {
-        always {
-            sh 'mvn clean'
-            sh 'docker system prune -f'
+            }
         }
     }
 
